@@ -6,7 +6,7 @@ using static System.Net.Mime.MediaTypeNames;
 
 public class GameManager : MonoBehaviour
 {
-    public static GameManager Instance;
+    public static GameManager instance;
 
     public UnityEngine.UI.Text sumText; 
     public int targetSum;
@@ -14,7 +14,14 @@ public class GameManager : MonoBehaviour
 
     void Awake()
     {
-        Instance = this;
+        if (instance == null)
+        {
+            instance = this;
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
     }
 
     void Start()
@@ -24,19 +31,23 @@ public class GameManager : MonoBehaviour
 
     void InitializeGame()
     {
-        // Set up initial conditions, generate target sum, etc.
         GenerateTargetSum();
     }
 
-    void GenerateTargetSum()
+    public int GenerateTargetSum()
     {
-        targetSum = UnityEngine.Random.Range(10, 30); // Adjust range as needed
+        targetSum = UnityEngine.Random.Range(10, 30);
         UpdateTargetSumText();
+        return targetSum;
+        
+      
     }
 
-    void UpdateTargetSumText()
+    public void UpdateTargetSumText()
     {
         sumText.text = "Target Sum: " + targetSum;
+        //sumText.text = ScoreManager.instance.Start();
+        
     }
 
     public void CheckpointReached(int checkpointNumber)
@@ -48,7 +59,7 @@ public class GameManager : MonoBehaviour
         {
             // Player has reached the target sum, implement win logic
             UnityEngine.Debug.Log("You win!");
-            // You can trigger a win screen or perform other actions here
+         
             InitializeGame(); // Restart the game
         }
         else if (currentSum > targetSum)
@@ -56,14 +67,14 @@ public class GameManager : MonoBehaviour
             // Player has exceeded the target sum, implement lose logic
             UnityEngine.Debug.Log("You lose!");
             UnityEngine.Debug.Log("You lose!");
-            // You can trigger a lose screen or perform other actions here
+           
             InitializeGame(); // Restart the game
         }
     }
 
     void UpdateCurrentSumText()
     {
-        // Optionally, update UI to display the current sum
+        
     }
 }
 

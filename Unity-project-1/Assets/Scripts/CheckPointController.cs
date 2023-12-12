@@ -7,12 +7,22 @@ public class CheckpointController : MonoBehaviour
 {
     public int checkpointNumber;
 
+
+
+
+
+    void Start()
+    {
+        checkpointNumber = UnityEngine.Random.Range(6, 12);
+    }
+
     void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Player"))
         {
-            GameManager.Instance.CheckpointReached(checkpointNumber);
-            gameObject.SetActive(false); // Disable the checkpoint once it's reached
+            GameManager.instance.CheckpointReached(checkpointNumber);
+            ScoreManager.instance.AddPoint();
+            gameObject.SetActive(false);
         }
     }
 }
