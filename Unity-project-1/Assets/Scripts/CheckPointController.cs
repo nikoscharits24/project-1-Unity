@@ -10,9 +10,12 @@ public class CheckpointController : MonoBehaviour
     public int checkpointNumber;
 
     public TextMesh checkpointPoints;
+
     //audio
     private AudioSource audioSource;
-    public  AudioClip checkpointSound;
+    public AudioClip checkpointSound;
+
+   
 
 
 
@@ -36,21 +39,26 @@ public class CheckpointController : MonoBehaviour
         {
             GameManager.instance.CheckpointReached(checkpointNumber);
             ScoreManager.instance.AddPoint(checkpointNumber);
-            PlayCheckpointSound();
-            gameObject.SetActive(false);
-        }
+            if (PlayCheckpointSound())
+            {
+                gameObject.SetActive(false);
+            }
+            }
+       
     }
 
-    void PlayCheckpointSound()
+    bool PlayCheckpointSound()
     {
         if (audioSource != null && checkpointSound != null)
         {
             UnityEngine.Debug.Log("Playing checkpoint sound.");
             audioSource.PlayOneShot(checkpointSound);
+            return true;
         }
         else
         {
-            UnityEngine.Debug.LogWarning("AudioSource or AudioClip is not assigned."); 
+            UnityEngine.Debug.LogWarning("AudioSource or AudioClip is not assigned.");
+            return false; 
         }
     }
 }

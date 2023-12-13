@@ -17,6 +17,10 @@ public class GameManager : MonoBehaviour
     public AudioClip winSound;
     public AudioClip loseSound;
 
+    //screens
+    public GameObject winScreen;
+    public GameObject loseScreen;
+
     void Awake()
     {
         if (instance == null)
@@ -64,18 +68,32 @@ public class GameManager : MonoBehaviour
         {
             // Player has reached the target sum, implement win logic
             UnityEngine.Debug.Log("You win!");
-            PlayWinSound();
+            ShowWinScreen();
             InitializeGame();
         }
         else if (currentSum > targetSum)
         {
             // Player has exceeded the target sum, implement lose logic
             UnityEngine.Debug.Log("You lose!");
-            PlayLoseSound();
+            ShowLoseScreen();
             InitializeGame();
         }
     }
+    void ShowWinScreen()
+    {
+        // Show the winning screen
+        winScreen.SetActive(true);
+        PlayWinSound();
+        
+    }
 
+    void ShowLoseScreen()
+    {
+        // Show the losing screen
+        loseScreen.SetActive(true);
+        PlayLoseSound();
+        
+    }
 
     //sounds
     void PlayWinSound()
