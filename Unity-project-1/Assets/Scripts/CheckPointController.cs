@@ -21,7 +21,7 @@ public class CheckpointController : MonoBehaviour
         if (other.CompareTag("Player"))
         {
             GameManager.instance.CheckpointReached(checkpointNumber);
-            ScoreManager.instance.AddPoint();
+            ScoreManager.instance.AddPoint(checkpointNumber);
             gameObject.SetActive(false);
         }
     }

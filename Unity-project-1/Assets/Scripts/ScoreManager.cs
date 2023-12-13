@@ -20,15 +20,15 @@ public class ScoreManager : MonoBehaviour
 
     void Start()
     {
-        
+        targetscore = GameManager.instance.GenerateTargetSum();
         scoreText.text = $"{score.ToString()} POINTS";
         targetScoreText.text = $"TARGET SCORE: {targetscore.ToString()}";
 
     }
 
-    public void AddPoint()
+    public void AddPoint(int checkpointNumber)
     {
-        score += 1;
+        score += checkpointNumber;
         scoreText.text = score.ToString() + " POINTS";
     }
 }
