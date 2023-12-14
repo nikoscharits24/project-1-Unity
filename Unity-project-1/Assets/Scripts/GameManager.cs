@@ -21,6 +21,10 @@ public class GameManager : MonoBehaviour
     public GameObject winScreen;
     public GameObject loseScreen;
 
+    //restart
+    public GameOverScreen GameOverScreen;
+    int overPoints = 0;
+
     void Awake()
     {
         if (instance == null)
@@ -76,12 +80,13 @@ public class GameManager : MonoBehaviour
             // Player has exceeded the target sum, implement lose logic
             UnityEngine.Debug.Log("You lose!");
             ShowLoseScreen();
+            GameOver();   
             InitializeGame();
         }
     }
     void ShowWinScreen()
     {
-        // Show the winning screen
+        
         winScreen.SetActive(true);
         PlayWinSound();
         
@@ -89,7 +94,7 @@ public class GameManager : MonoBehaviour
 
     void ShowLoseScreen()
     {
-        // Show the losing screen
+       
         loseScreen.SetActive(true);
         PlayLoseSound();
         
@@ -121,6 +126,10 @@ public class GameManager : MonoBehaviour
         {
            UnityEngine.Debug.LogWarning("AudioSource or LoseSound is not assigned.");
         }
+    }
+    public void GameOver()
+    {
+        GameOverScreen.Setup(overPoints);
     }
 
 }

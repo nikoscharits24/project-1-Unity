@@ -16,7 +16,7 @@ public class ScoreManager : MonoBehaviour
     {
         instance = this;
     }
-
+    
 
     void Start()
     {

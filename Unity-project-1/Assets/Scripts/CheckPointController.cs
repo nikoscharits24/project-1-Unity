@@ -43,7 +43,8 @@ public class CheckpointController : MonoBehaviour
             {
                 gameObject.SetActive(false);
             }
-            }
+            
+        }
        
     }
 
