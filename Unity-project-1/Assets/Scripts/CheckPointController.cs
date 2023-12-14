@@ -8,6 +8,14 @@ using UnityEngine.UI;
 public class CheckpointController : MonoBehaviour
 {
     public int checkpointNumber;
+    int total;
+
+
+    public Collider _collider;
+    public Renderer _renderer;
+    public GameObject pointsBoard;
+    
+
 
     public TextMesh checkpointPoints;
 
@@ -22,6 +30,7 @@ public class CheckpointController : MonoBehaviour
     void Start()
     {
         checkpointNumber = UnityEngine.Random.Range(1, 10);
+        //total = total + checkpointNumber;
         checkpointPoints.text = checkpointNumber.ToString();
 
         //Initialize audio
@@ -31,6 +40,7 @@ public class CheckpointController : MonoBehaviour
             // If audio source component is not present, add it
             audioSource = gameObject.AddComponent<AudioSource>();
         }
+        //UnityEngine.Debug.Log(total);
     }
 
     void OnTriggerEnter(Collider other)
@@ -41,11 +51,23 @@ public class CheckpointController : MonoBehaviour
             ScoreManager.instance.AddPoint(checkpointNumber);
             if (PlayCheckpointSound())
             {
-                gameObject.SetActive(false);
+                UnityEngine.Debug.Log("Closing all components...");
+                //Collider
+                _collider.enabled = false;
+                //checkpoint renderer
+                _renderer.enabled = false;
+                //Points Board gameObject
+                pointsBoard.SetActive(false);
+
+                //Text gameObject
+                checkpointPoints.gameObject.SetActive(false);
+
+                
+
             }
-            
+
         }
-       
+
     }
 
     bool PlayCheckpointSound()
@@ -53,6 +75,7 @@ public class CheckpointController : MonoBehaviour
         if (audioSource != null && checkpointSound != null)
         {
             UnityEngine.Debug.Log("Playing checkpoint sound.");
+            //AudioSource.PlayClip(checkpointSound,);
             audioSource.PlayOneShot(checkpointSound);
             return true;
         }
