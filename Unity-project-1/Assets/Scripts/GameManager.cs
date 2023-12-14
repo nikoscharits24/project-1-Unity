@@ -23,7 +23,9 @@ public class GameManager : MonoBehaviour
 
     //restart
     public GameOverScreen GameOverScreen;
+    public GameOverWin GameOverWin;
     int overPoints = 0;
+    int eqPoints = 0;
 
     void Awake()
     {
@@ -132,6 +134,10 @@ public class GameManager : MonoBehaviour
         GameOverScreen.Setup(overPoints);
     }
 
+    public void GameOverW()
+    {
+        GameOverWin.Setup(eqPoints);
+    }
 }
 
 

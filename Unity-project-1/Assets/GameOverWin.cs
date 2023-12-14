@@ -4,14 +4,15 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
-public class GameOverScreen : MonoBehaviour
+
+public class GameOverWin : MonoBehaviour
 {
-    public Text deathText;
+    public Text winText;
 
     public void Setup(int score)
     {
         gameObject.SetActive(true);
-        deathText.text = "1+1 = 2, right?";
+        winText.text = "I guess you're a Genius!";
     }
     public void RestartButton()
     {
@@ -20,6 +21,7 @@ public class GameOverScreen : MonoBehaviour
 
     public void ExitButton()
     {
-         SceneManager.LoadScene("MainMenu");
+        SceneManager.LoadScene("MainMenu");
     }
 }
+
